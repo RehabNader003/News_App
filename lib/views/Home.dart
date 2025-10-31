@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/widgets/NewsList.dart';
 
 import '../core/style/app_colors.dart';
 import '../widgets/CategoryList.dart';
@@ -26,7 +27,12 @@ class  _HomeScreenState extends State<HomeSccreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Newsly'),
+        centerTitle: true,
+        title: const Text(
+            'Newsly',
+            style: TextStyle(fontWeight: FontWeight.bold),
+
+        ),
         leading: IconButton(
           icon: const Icon(Icons.menu),
           onPressed: () {
@@ -52,11 +58,15 @@ class  _HomeScreenState extends State<HomeSccreen> {
           padding: EdgeInsets.zero,
           children: const [
             DrawerHeader(
-              decoration: BoxDecoration(color: AppColors.primary),
+              decoration: BoxDecoration(color: AppColors.secondary),
               child: Text(
                 'Newsly Menu',
-                style: TextStyle(color: AppColors.onPrimary, fontSize: 24),
+                style: TextStyle(color: AppColors.onPrimary, fontSize: 24, fontWeight: FontWeight.bold),
               ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
             ),
             ListTile(
               leading: Icon(Icons.home),
@@ -75,8 +85,12 @@ class  _HomeScreenState extends State<HomeSccreen> {
       ),
       body: CustomScrollView(
         slivers: [
-          const SliverToBoxAdapter(child: CategoryList()),
-          //const NewsList(),
+           SliverToBoxAdapter(child: Container(
+            height: 60,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            child: const CategoryList(),
+          ),),
+          const NewsList(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

@@ -7,17 +7,21 @@ class CategoryList extends StatelessWidget {
 
   final List<String> _categories = const [
     'All',
-    'Politics',
-    'Sports',
     'Technology',
-    'Health',
+    'Business',
     'Entertainment',
+    'Health',
+    'Sports',
+    'Politics',
+
+
+
   ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50,
+        //height: 50,
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -31,7 +35,7 @@ class CategoryList extends StatelessWidget {
                 backgroundColor: AppColors.primary.withOpacity(0.1),
                 labelStyle: const TextStyle(
                   color: AppColors.primary,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w800,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
