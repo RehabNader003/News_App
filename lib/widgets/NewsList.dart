@@ -1,24 +1,33 @@
-// lib/widgets/news_list.dart
 
 import 'package:flutter/material.dart';
-import 'package:news_app/services/dummy_news_service.dart';
+import 'package:news_app/models/article_model.dart';
+import 'package:news_app/views/ArticleDetailsView.dart';
 import 'package:news_app/widgets/news_card.dart';
 
 
 class NewsList extends StatelessWidget {
-  const NewsList({super.key});
+  final List<ArticleModel> news;
+
+  const NewsList({
+    super.key,
+    required this.news,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final news = DummyNewsService.getNews();
-
     return SliverList(
       delegate: SliverChildBuilderDelegate(
             (context, index) {
           return NewsCard(
+            key: ValueKey(news[index].title),
             news: news[index],
             onTap: () {
-              print("pressed on : ${news[index].title}");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ArticleDetailsView(article: news[index]),
+                ),
+              );
             },
           );
         },

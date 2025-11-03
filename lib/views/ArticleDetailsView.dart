@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/models/article_model.dart';
 import 'package:news_app/core/style/app_colors.dart';
-import 'package:news_app/views/article_web_view.dart';
+import 'package:news_app/views/article_web__iew.dart';
 
 class ArticleDetailsView extends StatelessWidget {
   final ArticleModel article;
@@ -20,7 +20,13 @@ class ArticleDetailsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Article'),
-
+        // actions: [
+        //   if (article.url != null)
+        //     IconButton(
+        //       icon: const Icon(Icons.open_in_browser),
+        //       onPressed: () => _launchURL(article.url!),
+        //     ),
+        // ],
       ),
       body: CustomScrollView(
         slivers: [
@@ -94,7 +100,7 @@ class ArticleDetailsView extends StatelessWidget {
                   )
                 else
                   const Text(
-                    "No full content available.",
+                    "No full content available. Tap the browser icon to read the full article.",
                     style: TextStyle(color: Colors.grey),
                   ),
 
@@ -120,7 +126,7 @@ class ArticleDetailsView extends StatelessWidget {
                           );
                         },
                         icon: const Icon(Icons.open_in_browser),
-                        label: const Text("Open Full Article"),
+                        label: const Text("Open Full Article in App"),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
