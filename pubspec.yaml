@@ -36,11 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   dio: ^5.9.0
-<<<<<<< HEAD
-=======
   intl: ^0.20.2
   webview_flutter: ^4.13.0
->>>>>>> 40b2990 (feat: add webview_flutter package for in-app article viewing)
 
 dev_dependencies:
   flutter_test:
