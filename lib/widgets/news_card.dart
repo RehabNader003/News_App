@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:news_app/models/news_item.dart';
+import 'package:news_app/models/article_model.dart';
 
 class NewsCard extends StatelessWidget {
-  final NewsItem news;
+  final ArticleModel news;
   final VoidCallback onTap;
 
   const NewsCard({
@@ -30,16 +30,28 @@ class NewsCard extends StatelessWidget {
               ClipRRect(
                 borderRadius:
                 const BorderRadius.vertical(top: Radius.circular(12)),
-                child: Image.asset(
-                  news.imagePath,
+                child: Image.network(
+                  news.imagePath ?? 'https://i.pinimg.com/originals/b2/a7/8b/b2a78b7520577fc3664213e22bffd2c3.jpg',
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Container(
+                      height: 200,
+                      color: Colors.grey[200],
+                      child: const Center(
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
+                    );
+                  },
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       height: 200,
                       color: Colors.grey[300],
-                      child: const Icon(Icons.image_not_supported, size: 50),
+                      child: const Center(
+                        child: Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                      ),
                     );
                   },
                 ),
@@ -62,7 +74,7 @@ class NewsCard extends StatelessWidget {
 
                     // description
                     Text(
-                      news.description,
+                      news.description?? '',
                       style: Theme.of(context).textTheme.bodyMedium,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
@@ -72,12 +84,15 @@ class NewsCard extends StatelessWidget {
                     // Read More
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        "Read More",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                      child: GestureDetector(
+                        onTap: onTap, // نفس الـ onTap
+                        child: Text(
+                          "Read More",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),

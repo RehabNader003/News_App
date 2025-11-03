@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/widgets/NewsList.dart';
-
+import 'package:news_app/views/CategoryView.dart';
+import 'package:news_app/widgets/news_list_builder.dart';
 import '../core/style/app_colors.dart';
 import '../widgets/CategoryList.dart';
 
@@ -85,12 +85,20 @@ class  _HomeScreenState extends State<HomeSccreen> {
       ),
       body: CustomScrollView(
         slivers: [
-           SliverToBoxAdapter(child: Container(
-            height: 60,
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            child: const CategoryList(),
-          ),),
-          const NewsList(),
+          SliverToBoxAdapter(
+            child: CategoryList(
+              selectedCategory: 'general',
+              onCategorySelected: (category) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CategoryView(category: category),
+                  ),
+                );
+              },
+            ),
+          ),
+          const NewsListBuilder(category: 'general',),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
